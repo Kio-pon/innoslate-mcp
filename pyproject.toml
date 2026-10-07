@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "innoslate-mcp"
+version = "0.1.0"
+description = "MCP server that lets an AI assistant read and fill an Innoslate project through your own logged-in browser"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Kio-pon" }]
+keywords = ["mcp", "innoslate", "systems-engineering", "requirements", "playwright"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development",
+]
+dependencies = [
+  "mcp>=1.9",
+  "playwright>=1.40",
+  "pypdf>=4.0",
+  "python-docx>=1.1",
+  "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+innoslate-mcp = "innoslate_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/innoslate_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

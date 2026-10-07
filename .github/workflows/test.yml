@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, python: "3.12", mcp: ""}
+          - {os: ubuntu-latest, python: "3.10", mcp: "mcp<2"}
+          - {os: windows-latest, python: "3.12", mcp: ""}
+          - {os: macos-latest, python: "3.12", mcp: ""}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[test]"
+          if [ -n "${{ matrix.mcp }}" ]; then pip install "${{ matrix.mcp }}"; fi
+          pip list | grep -iE "^(mcp|playwright) "
+      - name: Install Chromium
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then python -m playwright install --with-deps chromium; else python -m playwright install chromium; fi
+      - name: Doctor
+        run: innoslate-mcp doctor
+      - name: Test
+        run: python -m pytest -v

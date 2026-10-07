@@ -1,0 +1,53 @@
+{
+  "note": "Stakeholder requirements traced from an existing user needs document. Run with dry_run first.",
+  "entities": [
+    {
+      "key": "sr",
+      "class": "Artifact",
+      "number": "SR.1",
+      "name": "MP. Stakeholder Requirements",
+      "labels": ["Requirements Document"],
+      "description": "Stakeholder requirements derived from the user needs in UN.1."
+    },
+    {
+      "key": "sr1",
+      "class": "Requirement",
+      "number": "SR.1.1",
+      "name": "Open alert list",
+      "description": "The system shall list every open alert received from the monitoring backend.",
+      "labels": ["Functional Requirement"],
+      "attributes": {"Rationale": "Supervisors need one place that shows every unresolved alert (UN.1.2).", "Status": "Draft"},
+      "document": "sr",
+      "relations": {"traced from": [{"number": "UN.1.2", "document": {"number": "UN.1", "name": "MP. User Needs Document"}}]}
+    },
+    {
+      "key": "sr2",
+      "class": "Requirement",
+      "number": "SR.1.2",
+      "name": "Alert refresh time",
+      "description": "The system shall show a new alert within TBD seconds of receiving it.",
+      "labels": ["Performance Requirement"],
+      "attributes": {"Rationale": "The guide gives no value; TBD until the stakeholder confirms."},
+      "document": "sr",
+      "relations": {"traced from": [{"number": "UN.1.2", "document": {"number": "UN.1", "name": "MP. User Needs Document"}}]}
+    },
+    {
+      "key": "sr2-tbd",
+      "class": "Issue",
+      "name": "Alert refresh time is TBD",
+      "description": "Ask the stakeholder for the maximum delay between an alert and its display.",
+      "attributes": {"Status": "Open"},
+      "relations": {"caused by": ["sr2"]}
+    },
+    {
+      "key": "sr1-1",
+      "class": "Requirement",
+      "number": "SR.1.1.1",
+      "name": "Alert list sorting",
+      "description": "The system shall sort the open alert list by time received, newest first.",
+      "labels": ["Functional Requirement"],
+      "document": "sr",
+      "parent": "sr1"
+    }
+  ]
+}

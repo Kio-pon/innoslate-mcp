@@ -1,0 +1,23 @@
+# private notes about one team's project
+HANDOFF.md
+
+# credentials, browser profiles, project workspaces
+.env
+*.env
+browser-profile/
+.innoslate-mcp/
+snapshot.json
+PROJECT_MAP.md
+NOMENCLATURE.md
+audit.log
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.coverage
